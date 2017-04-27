@@ -1,11 +1,12 @@
 package imgflip
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/google/go-querystring/query"
 )
 
 //RespData ...
@@ -20,20 +21,14 @@ func (c Client) request(path, method string, i, o interface{}) error {
 	//merge the path with the base url
 	url := c.baseURL + path
 
-	//Convert struct to json bytes
-	var buf *bytes.Buffer
-	if method == "POST" && i != nil {
-		jsonValue, err := json.Marshal(i)
-		if err != nil {
-			return nil
-		}
-		buf = bytes.NewBuffer(jsonValue)
-	} else {
-		buf = bytes.NewBuffer(nil)
+	//Convert struct to query parameters
+	if i != nil {
+		v, _ := query.Values(i)
+		url += "?" + v.Encode()
 	}
 
 	//create http request and send
-	req, err := http.NewRequest(method, url, buf)
+	req, err := http.NewRequest(method, url, nil)
 	if err != nil {
 		return nil
 	}

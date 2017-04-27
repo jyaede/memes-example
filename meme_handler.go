@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/yaede7/go-rest-api-example/collection"
-	"github.com/yaede7/go-rest-api-example/imgflip"
+	"github.com/yaede7/memes-example/collection"
+	"github.com/yaede7/memes-example/imgflip"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

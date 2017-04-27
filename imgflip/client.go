@@ -1,6 +1,8 @@
 package imgflip
 
-import "net/http"
+import (
+	"net/http"
+)
 
 const (
 	baseURL = "https://api.imgflip.com"

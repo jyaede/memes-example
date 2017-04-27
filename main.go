@@ -3,17 +3,20 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/handlers"
+	"github.com/joho/godotenv"
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/cors"
-	"github.com/yaede7/go-rest-api-example/imgflip"
+	"github.com/yaede7/memes-example/imgflip"
 	"gopkg.in/mgo.v2"
 )
 
 func main() {
+	godotenv.Load()
 
-	imgflipClient := imgflip.New("", "")
+	imgflipClient := imgflip.New(os.Getenv("USERNAME"), os.Getenv("PASSWORD"))
 
 	sess, err := mgo.Dial("")
 	if err != nil {
